@@ -14,3 +14,5 @@ db.on("error", (err) =>
 );
 db.on("connected", () => console.log("MongoDB is connected"));
 db.on("disconnected", () => console.log("MongoDB is disconnected"));
+
+module.exports = mongoose
