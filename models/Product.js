@@ -15,3 +15,8 @@ const productSchema = new mongoose.Schema({
   tags: [{ type: String }],
   createdAt: { type: Date, default: Date.now },
 });
+
+// Compile schema into model - maps to 'products' collection automatically
+const Product = mongoose.model("Product", productSchema);
+
+module.exports = Product;
