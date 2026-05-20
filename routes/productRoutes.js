@@ -57,7 +57,25 @@ router.delete("/:id", async (req, res) => {
 // INDEX - GET / (Advanced Querying)
 router.get("/", async (req, res) => {
   try {
-    const products = await Product.find({});
+    const query = {};
+
+    // Filter by category
+    if (req.query.category) {
+      query.category = req.query.category;
+    }
+
+    // Filter by price range
+    if (req.query.minPrice || req.query.maxPrice) {
+      query.price = {};
+      if (req.query.minPrice) {
+        query.price.$gte = Number(req.query.minPrice);
+      }
+      if (req.query.maxPrice) {
+        query.price.$lte = Number(req.query.maxPrice);
+      }
+    }
+
+    const products = await Product.find(query);
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ error: error.message });
