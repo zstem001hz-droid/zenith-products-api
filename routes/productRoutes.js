@@ -57,6 +57,7 @@ router.delete("/:id", async (req, res) => {
 // INDEX - GET / (Advanced Querying)
 router.get("/", async (req, res) => {
   try {
+    // Query object
     const query = {};
 
     // Filter by category
@@ -75,7 +76,15 @@ router.get("/", async (req, res) => {
       }
     }
 
-    const products = await Product.find(query);
+    // Sort object
+    let sort = {};
+    if (req.query.sortBy === "price_asc") {
+      sort.price = 1;
+    } else if (req.query.sortBy === "price_desc") {
+      sort.price = -1;
+    }
+
+    const products = await Product.find(query).sort(sort);
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ error: error.message });
