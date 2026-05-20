@@ -160,3 +160,5 @@ All endpoints can be tested using [Postman](https://www.postman.com). Set the ba
 ---
 
 ## Reflection
+
+Building the Zenith Products API reinforced the value of modular application architecture — separating database connection logic, schema definitions, and route handlers into distinct files made the codebase easier to reason about and debug at each stage. The most challenging part was implementing the advanced querying endpoint, which required dynamically building a Mongoose query object based on incoming request parameters. This approach — constructing the filter, sort, and pagination logic conditionally — demonstrated how concepts like comparison operators (`$gte`, `$lte`), `.sort()`, `.skip()`, and `.limit()` work together in a real API context. Securing credentials with environment variables and including a clean `.gitignore` from the first commit reflects professional development practices that protect sensitive data throughout the entire development lifecycle.
